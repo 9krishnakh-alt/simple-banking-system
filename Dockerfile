@@ -1,9 +1,12 @@
-FROM eclipse-temurin:17-jdk AS build
-WORKDIR /app
-COPY BankingSystem.java .
-RUN javac BankingSystem.java
+FROM maven:3.9.9-eclipse-temurin-21
 
-FROM eclipse-temurin:17-jre
 WORKDIR /app
-COPY --from=build /app/*.class .
-CMD ["java", "BankingSystem"]
+
+COPY pom.xml .
+COPY BankingSystem.java .
+
+RUN mvn -q -DskipTests compile dependency:copy-dependencies -DoutputDirectory=target/dependency
+
+RUN mkdir -p data
+
+CMD ["java","--add-modules","jdk.httpserver","-cp","target/classes:target/dependency/*","BankingSystem"]
