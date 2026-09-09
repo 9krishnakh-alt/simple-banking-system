@@ -3,10 +3,10 @@ import java.util.List;
 
 public class Customer {
 
-    private int id;
-    private String name;
-    private String email;
-    private List<Account> accounts;
+    private final int id;
+    private final String name;
+    private final String email;
+    private final List<Account> accounts;
 
     public Customer(int id, String name, String email) {
         this.id = id;
@@ -32,6 +32,8 @@ public class Customer {
     }
 
     public void addAccount(Account account) {
-        accounts.add(account);
+        if (account != null) {
+            accounts.add(account);
+        }
     }
-    }
+}
