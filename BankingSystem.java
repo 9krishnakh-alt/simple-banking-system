@@ -50,7 +50,7 @@ public class BankingSystem {
     private static String esc(String s) {
         if (s == null) return "";
         return s.replace("&","&amp;").replace("<","&lt;").replace(">","&gt;")
-                .replace(""","&quot;").replace("'","&#39;");
+                .replace("\"","&quot;").replace("'","&#39;");
     }
 
     private static String param(String q, String k) {
